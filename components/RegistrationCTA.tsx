@@ -1,0 +1,64 @@
+"use client";
+
+import { motion } from "framer-motion";
+
+export default function RegistrationCTA() {
+  return (
+    <section id="register" className="py-20 sm:py-28 bg-gradient-to-b from-slate-50 to-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-2xl mx-auto text-center"
+        >
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#0a1628] mb-4">
+            Register for Arduino Day
+          </h2>
+          <p className="text-lg text-gray-600 mb-8">
+            Join us for a day of workshops, talks, and hands-on sessions. Registration is free.
+          </p>
+          <motion.a
+            href="#register"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+            className="inline-block px-10 py-4 rounded-full bg-[#00979C] hover:bg-[#00878F] text-white font-semibold text-lg transition-colors shadow-lg shadow-[#00979C]/30"
+          >
+            Register Now
+          </motion.a>
+          <p className="mt-6 text-sm text-gray-500">
+            Registration link coming soon. Follow{" "}
+            <a
+              href="https://days.arduino.cc/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#00979C] hover:underline"
+            >
+              Arduino Days
+            </a>{" "}
+            for updates.
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-4 text-sm">
+            <a
+              href="https://days.arduino.cc/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#00979C] hover:underline"
+            >
+              Call for speakers
+            </a>
+            <span className="text-gray-300">|</span>
+            <a
+              href="https://days.arduino.cc/events"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#00979C] hover:underline"
+            >
+              Arduino Days events
+            </a>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
