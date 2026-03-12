@@ -5,6 +5,7 @@ import EventDetails from "@/components/EventDetails";
 import Schedule from "@/components/Schedule";
 import RegistrationCTA from "@/components/RegistrationCTA";
 import FAQ from "@/components/FAQ";
+import PeopleBehind from "@/components/PeopleBehind";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
         <Schedule />
         <RegistrationCTA />
         <FAQ />
+        <PeopleBehind />
         <Footer />
       </main>
     </>
