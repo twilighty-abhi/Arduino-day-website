@@ -5,7 +5,8 @@ import { scheduleData } from "@/lib/schedule";
 
 const typeColors: Record<string, string> = {
   workshop: "bg-[#00979C]/20 text-[#00979C]",
-  keynote: "bg-[#E47128]/20 text-[#E47128]",
+  talk: "bg-[#E47128]/20 text-[#E47128]",
+  "flash-talk": "bg-[#E47128]/20 text-[#E47128]",
   "hands-on": "bg-[#E5AD24]/20 text-[#8C7965]",
   break: "bg-gray-200 text-gray-600",
   networking: "bg-[#62AEB2]/20 text-[#00878F]",
