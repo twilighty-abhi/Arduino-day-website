@@ -98,7 +98,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
         >
-          <Countdown targetDate={new Date("2026-03-28T09:00:00")} />
+          <Countdown targetDate={new Date("2026-03-28T10:00:00")} />
         </motion.div>
 
         <motion.div
@@ -108,17 +108,21 @@ export default function Hero() {
           className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-12"
         >
           <Link
-            href="#register"
+            href="https://tinkerhub.org/events/G5DBKWNQ9K/Arduino%20Day%202026"
+            target="_blank"
+            rel="noopener noreferrer"
             className="px-8 py-4 rounded-full bg-[#00979C] hover:bg-[#00878F] text-white font-semibold transition-colors min-w-[180px] text-center"
           >
             Register Now
           </Link>
-          <button
-            type="button"
+          <Link
+            href="https://forms.gle/M91FRPjqZFS5MDVg7"
+            target="_blank"
+            rel="noopener noreferrer"
             className="px-8 py-4 rounded-full border-2 border-white/40 hover:border-white/70 text-white font-semibold transition-colors min-w-[180px] text-center"
           >
             Call for Speakers
-          </button>
+          </Link>
           <ShareButton className="px-8 py-4 rounded-full border-2 border-[#62AEB2]/50 hover:border-[#62AEB2] text-[#62AEB2] font-semibold transition-colors min-w-[180px] text-center flex items-center justify-center gap-2" />
         </motion.div>
       </div>
