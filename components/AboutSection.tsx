@@ -17,11 +17,11 @@ export default function AboutSection() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-[#0a1628] mb-4">
-            About Arduino Day
+            Arduino Day in Kochi
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Arduino Day is a worldwide celebration of Arduino and the maker community.
-            This year we explore AI, edge computing, and the future of accessible technology.
+            A full day where Kochi&apos;s makers, students, and tinkerers come together to
+            learn, build, and show what&apos;s possible with Arduino.
           </p>
         </motion.div>
 
@@ -34,17 +34,17 @@ export default function AboutSection() {
             className="space-y-6"
           >
             <h3 className="text-2xl font-bold text-[#00979C]">
-              Writing the next chapter of AI together
+              Global Arduino energy, Kochi flavour
             </h3>
             <p className="text-gray-600 leading-relaxed">
-              For two decades, Arduino has been the favorite of makers, educators, and innovators
-              to get started with electronics, Cloud, and IoT. Today we continue this heritage
-              in the new era of artificial intelligence, bringing open-source roots, affordability,
-              and ease of use to one of the most exciting times in tech.
+              Arduino Day is celebrated around the world, but this edition is shaped by Kochi&apos;s
+              own community — from school students discovering their first LED blink to engineers
+              experimenting with AI on the edge.
             </p>
             <p className="text-gray-600 leading-relaxed">
-              Arduino Days 2026 celebrates the community—educators, hobbyists, students, engineers,
-              and everyone who believes technology should be open, accessible, and empowering.
+              Expect a very Kochi mix of talks, flash sessions, competitions, and hands-on corners:
+              curious learners, hardware hackers, open-source enthusiasts, and folks who just love
+              building things together.
             </p>
             <ArduinoFactCarousel />
           </motion.div>
