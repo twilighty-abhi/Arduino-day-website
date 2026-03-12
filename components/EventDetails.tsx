@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 
 const EVENT_DATE = "2026-03-28";
-const EVENT_TIME = "09:00";
+const EVENT_TIME = "10:00";
 const EVENT_TITLE = "Arduino Day 2026 @ TinkerSpace Kochi";
 const EVENT_DESCRIPTION = "Join us for Arduino Day 2026 - a celebration of makers, AI, and edge computing at TinkerSpace Kochi.";
 const EVENT_LOCATION_LABEL = "TinkerSpace Kochi, Kochi, Kerala";
@@ -148,7 +148,7 @@ export default function EventDetails() {
                     </svg>
                   }
                 >
-                  9:00 AM onwards (full day)
+                  10:00 AM – 5:00 PM
                 </IconCard>
 
                 <IconCard
