@@ -2,7 +2,16 @@ export interface ScheduleItem {
   time: string;
   title: string;
   description: string;
-  type: "workshop" | "talk" | "flash-talk" | "hands-on" | "break" | "networking";
+  type:
+    | "workshop"
+    | "talk"
+    | "flash-talk"
+    | "hands-on"
+    | "break"
+    | "networking"
+    | "interactive"
+    | "competition"
+    | "demo";
 }
 
 export const scheduleData: ScheduleItem[] = [
@@ -25,69 +34,69 @@ export const scheduleData: ScheduleItem[] = [
     type: "flash-talk",
   },
   {
-    time: "11:00",
+    time: "10:55",
     title: "Micro Python OS in Arduino",
-    description: "Speaker: TBD • 40 mins",
+    description: "TBD • 20 mins",
     type: "talk",
+  },
+  {
+    time: "11:15",
+    title: "Interactive",
+    description: "25 mins",
+    type: "interactive",
   },
   {
     time: "11:40",
-    title: "Interactive Session",
-    description: "Facilitated interactive activities • 25 mins",
-    type: "hands-on",
-  },
-  {
-    time: "12:05",
-    title: "What beyond Arduino? (MCU to PCB)",
-    description: "Speaker: TBD • 40 mins",
+    title: "Arduino Q: Possibilities",
+    description: "Salman • 40 mins",
     type: "talk",
   },
   {
-    time: "12:45",
-    title: "Arduino Q: Possibilities",
-    description: "Speaker: TBD • 20 mins",
+    time: "12:20",
+    title: "What beyond Arduino? (MCU to PCB)",
+    description: "TBD • 20 mins",
     type: "flash-talk",
   },
   {
-    time: "13:05",
+    time: "12:40",
     title: "Lunch Break",
-    description: "Lunch + informal networking • 55 mins",
+    description: "55 mins",
     type: "break",
   },
   {
-    time: "14:00",
+    time: "13:35",
     title: "Micro Mouse / Line Following Competition",
-    description: "Hands-on competition • 60 mins",
-    type: "hands-on",
+    description: "60 mins",
+    type: "competition",
   },
   {
-    time: "15:00",
+    time: "14:35",
     title: "3D Enclosure for Arduino Components",
-    description: "Speaker: TBD • 30 mins",
-    type: "talk",
+    description: "TBD • 30 mins",
+    type: "demo",
+  },
+  {
+    time: "15:05",
+    title: "Interactive",
+    description: "25 mins",
+    type: "interactive",
   },
   {
     time: "15:30",
-    title: "Interactive Session",
-    description: "Group activity / challenges • 25 mins",
-    type: "hands-on",
-  },
-  {
-    time: "15:55",
     title: "Automating Workspaces",
     description: "Ziyad • 40 mins",
     type: "talk",
   },
   {
-    time: "16:35",
+    time: "16:10",
     title: "Closing + Open Floor / Networking",
-    description: "Organizers • Wrap-up + networking • 25 mins",
+    description: "Organizers • 25 mins",
     type: "networking",
   },
   {
-    time: "17:00",
+    time: "16:35",
     title: "End",
-    description: "Thank you for joining Arduino Day @ TinkerSpace Kochi!",
-    type: "networking",
+    description: "—",
+    type: "break",
   },
 ];

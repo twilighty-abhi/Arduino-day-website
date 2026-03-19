@@ -8,6 +8,9 @@ const typeColors: Record<string, string> = {
   talk: "bg-[#E47128]/20 text-[#E47128]",
   "flash-talk": "bg-[#E47128]/20 text-[#E47128]",
   "hands-on": "bg-[#E5AD24]/20 text-[#8C7965]",
+  interactive: "bg-[#E5AD24]/20 text-[#8C7965]",
+  competition: "bg-[#C026D3]/15 text-[#A21CAF]",
+  demo: "bg-[#3B82F6]/15 text-[#1D4ED8]",
   break: "bg-gray-200 text-gray-600",
   networking: "bg-[#62AEB2]/20 text-[#00878F]",
 };
