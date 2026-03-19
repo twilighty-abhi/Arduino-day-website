@@ -108,18 +108,12 @@ export default function Hero() {
           className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-12"
         >
           <Link
-            href="https://wa.me/919497704406?text=Hi%2C%20I%27d%20like%20to%20participate%20in%20the%20Line%20Following%20Robot%20competition%20at%20Arduino%20Day%20Kochi%202026."
+            href="https://forms.gle/VAmtAYbFiyqGQM9m8"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-8 py-4 rounded-full bg-[#25D366] hover:bg-[#1ebe5b] text-white font-semibold transition-colors min-w-[180px] text-center flex items-center justify-center gap-2"
+            className="px-8 py-4 rounded-full bg-[#E47128] hover:bg-[#d36523] text-white font-semibold transition-colors min-w-[180px] text-center"
           >
-            <svg className="w-5 h-5" viewBox="0 0 32 32" aria-hidden="true">
-              <path
-                fill="currentColor"
-                d="M16.04 5.02c-5.53 0-10.02 4.49-10.02 10.02 0 1.77.47 3.49 1.36 5.01L6 27l7.16-1.87c1.46.55 2.99.82 4.54.82h.01c5.53 0 10.02-4.49 10.02-10.02 0-2.68-1.04-5.2-2.93-7.1a10.01 10.01 0 0 0-7.76-3.8Zm0 2c4.43 0 8.02 3.6 8.02 8.03 0 4.43-3.6 8.03-8.03 8.03a8 8 0 0 1-3.3-.72l-.47-.21-4.25 1.11 1.14-4.14-.25-.43A7.98 7.98 0 0 1 8.02 15c0-4.43 3.6-8.03 8.03-8.03Zm-3.02 3.52-.57-.01c-.18 0-.47.07-.72.35-.25.28-.95.93-.95 2.26s.97 2.62 1.11 2.8c.14.18 1.9 3.02 4.61 4.16 2.28.94 2.74.84 3.23.79.49-.05 1.59-.65 1.81-1.28.22-.63.22-1.17.16-1.28-.06-.11-.25-.18-.53-.32-.28-.14-1.59-.79-1.84-.88-.25-.09-.43-.14-.62.14-.19.28-.71.88-.87 1.06-.16.18-.32.2-.6.07-.28-.14-1.18-.43-2.25-1.37-.83-.73-1.39-1.63-1.56-1.91-.16-.28-.02-.43.12-.57.12-.12.28-.32.41-.48.13-.16.18-.28.28-.46.09-.18.05-.34-.02-.48-.07-.14-.61-1.51-.86-2.07-.22-.52-.44-.56-.63-.57Z"
-              />
-            </svg>
-            Line Following Robot
+            Register for Line Following Robot
           </Link>
           <Link
             href="https://tinkerhub.org/events/G5DBKWNQ9K/Arduino%20Day%202026"
