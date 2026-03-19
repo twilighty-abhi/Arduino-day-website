@@ -11,6 +11,7 @@ const navLinks = [
   { href: "#schedule", label: "Schedule" },
   { href: "#faq", label: "FAQ" },
   { href: "#register", label: "Register" },
+  { href: "/im-attending", label: "I'm Attending" },
 ];
 
 export default function Navbar() {
