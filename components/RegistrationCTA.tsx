@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { EVENT_REGISTRATION_URL } from "@/lib/event";
 
 export default function RegistrationCTA() {
   return (
@@ -20,7 +21,7 @@ export default function RegistrationCTA() {
           </p>
           <div className="flex flex-col items-center justify-center gap-3">
             <motion.a
-              href="https://tinkerhub.org/events/G5DBKWNQ9K/Arduino%20Day%202026"
+              href={EVENT_REGISTRATION_URL}
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
