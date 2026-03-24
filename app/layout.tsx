@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     "Join Arduino Day 2026 at TinkerSpace Kochi on March 28. Celebrate makers, AI, edge computing, and the global Arduino community. Free event.",
   keywords: ["Arduino", "Arduino Day", "Kochi", "TinkerSpace", "makers", "IoT", "AI"],
   icons: {
-    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    icon: [{ url: "/Arduino_DAYS2026_Logotype.svg", type: "image/svg+xml" }],
   },
   openGraph: {
     title: "Arduino Day 2026 @ TinkerSpace Kochi | March 28",
