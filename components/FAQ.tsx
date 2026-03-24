@@ -3,6 +3,15 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+type FAQItem = {
+  q: string;
+  a: string;
+  link?: {
+    href: string;
+    label: string;
+  };
+};
+
 const FAQ_ITEMS = [
   {
     q: "Who can attend?",
@@ -17,6 +26,14 @@ const FAQ_ITEMS = [
     a: "Just yourself and your curiosity! A laptop can be helpful for workshops. Arduino kits and hardware will be available at the venue.",
   },
   {
+    q: "Will food be provided?",
+    a: "No. Food is not provided during the lunch break, so please arrange your own meal.",
+    link: {
+      href: "https://tinkerhub.frappe.cloud/tinkerspace/accessibility#:~:text=min%20View%20Location-,Food%20Spots,-11%20to%2011",
+      label: "Food place suggestions near TinkerSpace",
+    },
+  },
+  {
     q: "Do I need Arduino experience?",
     a: "No. We welcome beginners. Workshops will cover basics, and there will be sessions for all skill levels.",
   },
@@ -24,7 +41,7 @@ const FAQ_ITEMS = [
     q: "Is parking available?",
     a: "Little Parking is available in the venue. We recommend public transport or carpooling when possible.",
   },
-];
+] satisfies FAQItem[];
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -83,6 +100,20 @@ export default function FAQ() {
                   >
                     <p className="px-4 sm:px-5 pb-4 sm:pb-5 text-gray-600 text-sm sm:text-base">
                       {item.a}
+                      {item.link && (
+                        <>
+                          {" "}
+                          <a
+                            href={item.link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[#00979C] hover:underline font-medium"
+                          >
+                            {item.link.label}
+                          </a>
+                          .
+                        </>
+                      )}
                     </p>
                   </motion.div>
                 )}
