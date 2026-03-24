@@ -33,15 +33,6 @@ export default function RegistrationCTA() {
           </div>
           <div className="mt-8 flex flex-wrap justify-center gap-4 text-sm">
             <a
-              href="https://forms.gle/M91FRPjqZFS5MDVg7"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#00979C] hover:underline"
-            >
-              Call for speakers
-            </a>
-            <span className="text-gray-300">|</span>
-            <a
               href="https://days.arduino.cc/events"
               target="_blank"
               rel="noopener noreferrer"
