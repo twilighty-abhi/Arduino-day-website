@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { type ChangeEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 
 const CANVAS_WIDTH = 1080;
@@ -39,9 +39,20 @@ function drawRoundedRect(
 export default function ImAttendingPage() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [photoUrl, setPhotoUrl] = useState<string | null>(null);
-  const [attendeeName, setAttendeeName] = useState("Your Name");
   const [zoom, setZoom] = useState(1);
   const [offsetY, setOffsetY] = useState(0);
+  const [accent, setAccent] = useState<"teal" | "orange" | "violet">("teal");
+  const zoomLabel = `${zoom.toFixed(2)}x`;
+  const offsetLabel = offsetY > 0 ? `+${offsetY}` : `${offsetY}`;
+
+  const accentColors = useMemo(
+    () => ({
+      teal: { primary: "#0E7490", soft: "#22D3EE", chip: "rgba(14,116,144,0.48)", text: "#E0F7FF" },
+      orange: { primary: "#B45309", soft: "#F59E0B", chip: "rgba(180,83,9,0.5)", text: "#FFF4E6" },
+      violet: { primary: "#6D28D9", soft: "#A78BFA", chip: "rgba(109,40,217,0.48)", text: "#F3E8FF" },
+    }),
+    [],
+  );
 
   const drawPoster = useCallback(async () => {
     const canvas = canvasRef.current;
@@ -52,10 +63,19 @@ export default function ImAttendingPage() {
     canvas.width = CANVAS_WIDTH;
     canvas.height = CANVAS_HEIGHT;
 
-    const [bg, logo] = await Promise.all([
-      loadImage("/Zoom%20background%2003.png"),
-      loadImage("/Arduino_DAYS2026_Logotype_text.svg"),
-    ]);
+    const palette = accentColors[accent];
+    let bg: HTMLImageElement;
+    let logo: HTMLImageElement;
+    try {
+      [bg, logo] = await Promise.all([
+        loadImage("/Zoom%20background%2003.png"),
+        loadImage("/Arduino_DAYS2026_Logotype_text.svg"),
+      ]);
+    } catch {
+      ctx.fillStyle = "#0a1628";
+      ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+      return;
+    }
 
     const scale = Math.max(CANVAS_WIDTH / bg.width, CANVAS_HEIGHT / bg.height);
     const bgW = bg.width * scale;
@@ -65,69 +85,124 @@ export default function ImAttendingPage() {
     ctx.drawImage(bg, bgX, bgY, bgW, bgH);
 
     const overlay = ctx.createLinearGradient(0, 0, 0, CANVAS_HEIGHT);
-    overlay.addColorStop(0, "rgba(10, 22, 40, 0.65)");
-    overlay.addColorStop(1, "rgba(10, 22, 40, 0.82)");
+    overlay.addColorStop(0, "rgba(8, 24, 44, 0.42)");
+    overlay.addColorStop(1, "rgba(10, 22, 40, 0.76)");
     ctx.fillStyle = overlay;
     ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
-    ctx.drawImage(logo, 90, 120, 470, 95);
+    const glow = ctx.createRadialGradient(180, 200, 20, 180, 200, 520);
+    glow.addColorStop(0, `${palette.primary}33`);
+    glow.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.fillStyle = glow;
+    ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
-    ctx.fillStyle = "rgba(98, 174, 178, 0.25)";
-    drawRoundedRect(ctx, 90, 255, 290, 52, 26);
+    // One soft outer edge (single frame, not nested cards)
+    const inset = 36;
+    ctx.strokeStyle = "rgba(255,255,255,0.18)";
+    ctx.lineWidth = 1.5;
+    drawRoundedRect(ctx, inset, inset, CANVAS_WIDTH - inset * 2, CANVAS_HEIGHT - inset * 2, 28);
+    ctx.stroke();
+
+    const pad = 72;
+    const contentW = CANVAS_WIDTH - pad * 2;
+
+    // Logo + date row (editorial header)
+    const logoW = 400;
+    const logoH = (logo.height / logo.width) * logoW;
+    ctx.drawImage(logo, pad, pad + 8, logoW, logoH);
+
+    ctx.textAlign = "right";
+    ctx.fillStyle = palette.text;
+    ctx.font = "600 22px Inter, Arial, sans-serif";
+    ctx.fillText("Kochi", CANVAS_WIDTH - pad, pad + logoH * 0.35);
+    ctx.fillStyle = "rgba(226,232,240,0.95)";
+    ctx.font = "500 20px Inter, Arial, sans-serif";
+    ctx.fillText("March 28, 2026", CANVAS_WIDTH - pad, pad + logoH * 0.35 + 28);
+    ctx.textAlign = "left";
+
+    // Single hero line (no duplicate in footer)
+    const heroY = pad + logoH + 52;
+    ctx.fillStyle = palette.primary;
+    drawRoundedRect(ctx, pad, heroY - 4, 6, 56, 3);
     ctx.fill();
-    ctx.fillStyle = "#D3F3F5";
-    ctx.font = "600 24px Inter, Arial, sans-serif";
-    ctx.fillText("Kochi • March 28, 2026", 122, 289);
 
     ctx.fillStyle = "#FFFFFF";
-    ctx.font = "800 92px Inter, Arial, sans-serif";
-    ctx.fillText("I'M ATTENDING", 90, 395);
+    ctx.font = "800 78px Inter, Arial, sans-serif";
+    ctx.fillText("I'M ATTENDING", pad + 22, heroY + 44);
 
-    const frameX = 90;
-    const frameY = 435;
-    const frameW = 900;
-    const frameH = 620;
-
-    ctx.fillStyle = "rgba(255,255,255,0.06)";
-    drawRoundedRect(ctx, frameX, frameY, frameW, frameH, 34);
-    ctx.fill();
+    // Photo block — one rounded mask, one stroke (no double boxes)
+    const frameX = pad;
+    const frameY = heroY + 72;
+    const frameW = contentW;
+    const frameH = 700;
+    const photoR = 28;
 
     ctx.save();
-    drawRoundedRect(ctx, frameX + 10, frameY + 10, frameW - 20, frameH - 20, 28);
+    drawRoundedRect(ctx, frameX, frameY, frameW, frameH, photoR);
     ctx.clip();
 
     if (photoUrl) {
-      const people = await loadImage(photoUrl);
-      const baseScale = Math.max((frameW - 20) / people.width, (frameH - 20) / people.height);
-      const imgScale = baseScale * zoom;
-      const drawW = people.width * imgScale;
-      const drawH = people.height * imgScale;
-      const drawX = frameX + 10 + ((frameW - 20) - drawW) / 2;
-      const drawY = frameY + 10 + ((frameH - 20) - drawH) / 2 + offsetY;
-      ctx.drawImage(people, drawX, drawY, drawW, drawH);
+      try {
+        const people = await loadImage(photoUrl);
+        const baseScale = Math.max(frameW / people.width, frameH / people.height);
+        const imgScale = baseScale * zoom;
+        const drawW = people.width * imgScale;
+        const drawH = people.height * imgScale;
+        const drawX = frameX + (frameW - drawW) / 2;
+        const drawY = frameY + (frameH - drawH) / 2 + offsetY;
+        ctx.drawImage(people, drawX, drawY, drawW, drawH);
+      } catch {
+        ctx.fillStyle = "rgba(15, 23, 42, 0.65)";
+        ctx.fillRect(frameX, frameY, frameW, frameH);
+      }
     } else {
-      ctx.fillStyle = "rgba(255,255,255,0.12)";
-      ctx.fillRect(frameX + 10, frameY + 10, frameW - 20, frameH - 20);
-      ctx.fillStyle = "#E2E8F0";
-      ctx.font = "600 34px Inter, Arial, sans-serif";
+      ctx.fillStyle = "rgba(15, 23, 42, 0.55)";
+      ctx.fillRect(frameX, frameY, frameW, frameH);
+      const dotPattern = ctx.createLinearGradient(frameX, frameY, frameX + frameW, frameY + frameH);
+      dotPattern.addColorStop(0, "rgba(255,255,255,0.04)");
+      dotPattern.addColorStop(1, "rgba(255,255,255,0.01)");
+      ctx.fillStyle = dotPattern;
+      ctx.fillRect(frameX, frameY, frameW, frameH);
+      ctx.fillStyle = "rgba(248,250,252,0.55)";
+      ctx.font = "600 28px Inter, Arial, sans-serif";
       ctx.textAlign = "center";
-      ctx.fillText("Upload your team photo", CANVAS_WIDTH / 2, frameY + frameH / 2);
+      ctx.fillText("Add your photo", CANVAS_WIDTH / 2, frameY + frameH / 2 + 6);
       ctx.textAlign = "left";
     }
     ctx.restore();
 
-    ctx.fillStyle = "rgba(10, 22, 40, 0.8)";
-    drawRoundedRect(ctx, 90, 1085, 900, 165, 24);
+    ctx.strokeStyle = "rgba(255,255,255,0.28)";
+    ctx.lineWidth = 2;
+    drawRoundedRect(ctx, frameX, frameY, frameW, frameH, photoR);
+    ctx.stroke();
+
+    // Minimal footer — event facts only (no repeated headline)
+    const panelX = pad;
+    const panelY = frameY + frameH + 28;
+    const panelW = contentW;
+    const panelH = 112;
+
+    ctx.fillStyle = "rgba(2, 8, 20, 0.72)";
+    drawRoundedRect(ctx, panelX, panelY, panelW, panelH, 20);
     ctx.fill();
 
-    ctx.fillStyle = "#D3F3F5";
-    ctx.font = "700 42px Inter, Arial, sans-serif";
-    ctx.fillText(`${attendeeName.toUpperCase()} IS ATTENDING`, 125, 1155);
-    ctx.font = "600 30px Inter, Arial, sans-serif";
-    ctx.fillText("Arduino Day 2026 @ TinkerSpace Kochi", 125, 1205);
-    ctx.font = "500 26px Inter, Arial, sans-serif";
-    ctx.fillText("10:00 AM - 5:00 PM", 125, 1240);
-  }, [attendeeName, offsetY, photoUrl, zoom]);
+    ctx.fillStyle = palette.primary;
+    drawRoundedRect(ctx, panelX + 20, panelY + 22, 4, panelH - 44, 2);
+    ctx.fill();
+
+    const textX = panelX + 40;
+    ctx.fillStyle = "#F8FAFC";
+    ctx.font = "700 26px Inter, Arial, sans-serif";
+    ctx.fillText("Arduino Day 2026", textX, panelY + 46);
+
+    ctx.fillStyle = "#E2E8F0";
+    ctx.font = "600 20px Inter, Arial, sans-serif";
+    ctx.fillText("TinkerSpace Kochi", textX, panelY + 74);
+
+    ctx.fillStyle = "#CBD5E1";
+    ctx.font = "500 17px Inter, Arial, sans-serif";
+    ctx.fillText("March 28 · 10:00 AM – 5:00 PM", textX, panelY + 98);
+  }, [accent, accentColors, offsetY, photoUrl, zoom]);
 
   useEffect(() => {
     drawPoster().catch(() => {
@@ -135,7 +210,7 @@ export default function ImAttendingPage() {
     });
   }, [drawPoster]);
 
-  const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     const objectUrl = URL.createObjectURL(file);
@@ -144,6 +219,14 @@ export default function ImAttendingPage() {
       return objectUrl;
     });
   };
+
+  useEffect(() => {
+    return () => {
+      if (photoUrl?.startsWith("blob:")) {
+        URL.revokeObjectURL(photoUrl);
+      }
+    };
+  }, [photoUrl]);
 
   const downloadPoster = () => {
     const canvas = canvasRef.current;
@@ -155,41 +238,61 @@ export default function ImAttendingPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#0a1628] py-10 px-4">
+    <main className="relative min-h-screen bg-gradient-to-b from-[#08172B] via-[#0B1E36] to-[#0A1730] py-10 px-4 overflow-hidden">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -top-20 -left-16 h-72 w-72 rounded-full bg-cyan-400/20 blur-3xl" />
+        <div className="absolute top-56 -right-20 h-72 w-72 rounded-full bg-fuchsia-400/10 blur-3xl" />
+        <div className="absolute bottom-8 left-1/3 h-56 w-56 rounded-full bg-sky-300/10 blur-3xl" />
+      </div>
+
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
-          <h1 className="text-white text-2xl sm:text-3xl font-bold">I&apos;m Attending Poster Generator</h1>
+          <div>
+            <h1 className="text-white text-2xl sm:text-3xl font-bold tracking-tight">I&apos;m Attending Poster Generator</h1>
+            <p className="text-slate-200/80 text-sm mt-1">Upload, adjust, and download.</p>
+          </div>
           <Link
             href="/"
-            className="text-sm sm:text-base px-4 py-2 rounded-full border border-white/30 text-white/90 hover:text-white hover:border-white/60 transition-colors"
+            className="text-sm sm:text-base px-4 py-2 rounded-full border border-cyan-100/50 bg-white/5 text-slate-100 hover:text-white hover:border-cyan-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
           >
             Back to Home
           </Link>
         </div>
 
-        <div className="grid lg:grid-cols-12 gap-6">
-          <section className="lg:col-span-4 rounded-2xl border border-white/10 bg-white/5 p-5 sm:p-6">
-            <h2 className="text-white text-lg font-semibold mb-4">Customize Poster</h2>
+        <div className="grid lg:grid-cols-12 gap-6 relative z-10">
+          <section className="lg:col-span-4 rounded-3xl border border-cyan-100/20 bg-slate-900/55 backdrop-blur-2xl p-5 sm:p-6 shadow-[0_20px_60px_rgba(4,12,26,0.45)]">
+            <h2 className="text-white text-lg font-semibold mb-4 tracking-tight">Controls</h2>
 
-            <label className="block text-sm text-white/80 mb-2">Your Name / Team Name</label>
-            <input
-              type="text"
-              value={attendeeName}
-              onChange={(e) => setAttendeeName(e.target.value || "Your Name")}
-              maxLength={28}
-              className="w-full rounded-xl border border-white/20 bg-[#0d2137] px-3 py-2.5 text-white placeholder:text-white/40 outline-none focus:border-[#62AEB2]"
-              placeholder="Your Name"
-            />
+            <div className="mt-4">
+              <label className="block text-sm text-slate-100 mb-2 font-medium">Accent Color</label>
+              <div className="flex gap-2">
+                {(["teal", "orange", "violet"] as const).map((key) => (
+                  <button
+                    key={key}
+                    type="button"
+                    aria-label={key}
+                    onClick={() => setAccent(key)}
+                    className={`h-9 w-9 rounded-full border-2 transition-transform ${
+                      accent === key ? "border-white scale-110 ring-2 ring-white/70" : "border-slate-100/50"
+                    }`}
+                    style={{ backgroundColor: accentColors[key].primary }}
+                  />
+                ))}
+              </div>
+            </div>
 
-            <label className="block text-sm text-white/80 mt-5 mb-2">Upload People Photo</label>
+            <label className="block text-sm text-slate-100 mt-5 mb-2 font-medium">Upload Photo</label>
             <input
               type="file"
               accept="image/*"
               onChange={onFileChange}
-              className="block w-full text-sm text-white/80 file:mr-3 file:rounded-full file:border-0 file:bg-[#00979C] file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-[#00878F]"
+              className="block w-full text-sm text-slate-100 file:mr-3 file:rounded-full file:border-0 file:bg-cyan-700 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-cyan-600 focus-visible:outline-none"
             />
 
-            <label className="block text-sm text-white/80 mt-5 mb-2">Photo Zoom</label>
+            <div className="mt-5 mb-2 flex items-center justify-between">
+              <label className="block text-sm text-slate-100 font-medium">Photo Zoom</label>
+              <span className="rounded-full border border-cyan-100/30 bg-cyan-400/10 px-2 py-0.5 text-xs text-cyan-100">{zoomLabel}</span>
+            </div>
             <input
               type="range"
               min={1}
@@ -197,10 +300,13 @@ export default function ImAttendingPage() {
               step={0.01}
               value={zoom}
               onChange={(e) => setZoom(Number(e.target.value))}
-              className="w-full accent-[#62AEB2]"
+              className="w-full accent-cyan-400"
             />
 
-            <label className="block text-sm text-white/80 mt-5 mb-2">Photo Vertical Position</label>
+            <div className="mt-5 mb-2 flex items-center justify-between">
+              <label className="block text-sm text-slate-100 font-medium">Vertical Position</label>
+              <span className="rounded-full border border-cyan-100/30 bg-cyan-400/10 px-2 py-0.5 text-xs text-cyan-100">{offsetLabel}</span>
+            </div>
             <input
               type="range"
               min={-220}
@@ -208,20 +314,32 @@ export default function ImAttendingPage() {
               step={1}
               value={offsetY}
               onChange={(e) => setOffsetY(Number(e.target.value))}
-              className="w-full accent-[#62AEB2]"
+              className="w-full accent-cyan-400"
             />
 
             <button
               type="button"
               onClick={downloadPoster}
-              className="mt-6 w-full rounded-xl bg-[#00979C] hover:bg-[#00878F] text-white font-semibold py-3 transition-colors"
+              className="mt-6 w-full rounded-xl bg-gradient-to-r from-cyan-700 to-sky-600 hover:from-cyan-600 hover:to-sky-500 text-white font-semibold py-3 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
             >
               Download Poster (PNG)
+            </button>
+
+            <button
+              type="button"
+              onClick={() => {
+                setZoom(1);
+                setOffsetY(0);
+                setAccent("teal");
+              }}
+              className="mt-2 w-full rounded-xl border border-slate-300/35 bg-slate-900/35 hover:bg-slate-800/45 text-slate-100 font-medium py-2.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
+            >
+              Reset Controls
             </button>
           </section>
 
           <section className="lg:col-span-8">
-            <div className="rounded-2xl border border-white/10 bg-[#071223] p-3 sm:p-4">
+            <div className="rounded-3xl border border-cyan-100/20 bg-slate-900/55 backdrop-blur-2xl p-3 sm:p-4 shadow-[0_24px_70px_rgba(4,12,26,0.5)]">
               <canvas
                 ref={canvasRef}
                 width={CANVAS_WIDTH}
@@ -229,9 +347,6 @@ export default function ImAttendingPage() {
                 className="w-full h-auto rounded-xl"
               />
             </div>
-            <p className="mt-3 text-white/70 text-sm">
-              Upload a clear group photo for best output. Poster exports at high resolution.
-            </p>
           </section>
         </div>
       </div>
