@@ -5,22 +5,22 @@ import { motion } from "framer-motion";
 
 const PEOPLE = [
   {
+    name: "Abdul Samad M J",
+    role: "Content & Speaker Support",
+    url: "https://www.linkedin.com/in/abdulsamadmj/",
+    image: "/samad.jpeg",
+  },
+  {
     name: "Abhiram N J",
     role: "Host & Local Organizer",
     url: "https://www.linkedin.com/in/abhiram-n-j/",
     image: "/Abhiram.png",
   },
   {
-    name: "Salman Faris",
-    role: "Community & Program Design",
-    url: "https://www.linkedin.com/in/salmanfarisvp/",
-    image: "/salman.jpg",
-  },
-  {
-    name: "Abdul Samad M J",
-    role: "Content & Speaker Support",
-    url: "https://www.linkedin.com/in/abdulsamadmj/",
-    image: "/samad.jpeg",
+    name: "Jasim CM",
+    role: "Event Manager",
+    url: "https://www.linkedin.com/in/jasim-cm/",
+    image: "/jasim.jpg",
   },
   {
     name: "Midlaj C",
@@ -29,10 +29,10 @@ const PEOPLE = [
     image: "/midlaj.jpg",
   },
   {
-    name: "Jasim CM",
-    role: "Event Manager",
-    url: "https://www.linkedin.com/in/jasim-cm/",
-    image: "/jasim.jpg",
+    name: "Salman Faris",
+    role: "Community & Program Design",
+    url: "https://www.linkedin.com/in/salmanfarisvp/",
+    image: "/salman.jpg",
   },
 ];
 
