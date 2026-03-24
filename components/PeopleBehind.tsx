@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const PEOPLE = [
@@ -7,21 +8,31 @@ const PEOPLE = [
     name: "Abhiram N J",
     role: "Host & Local Organizer",
     url: "https://www.linkedin.com/in/abhiram-n-j/",
+    image: "/Abhiram.png",
   },
   {
     name: "Salman Faris",
     role: "Community & Program Design",
     url: "https://www.linkedin.com/in/salmanfarisvp/",
+    image: "/salman.jpg",
   },
   {
     name: "Abdul Samad M J",
     role: "Content & Speaker Support",
     url: "https://www.linkedin.com/in/abdulsamadmj/",
+    image: "/samad.jpeg",
   },
   {
     name: "Midlaj C",
     role: "Tech, Demos & Workshops",
     url: "https://www.linkedin.com/in/midlajc/",
+    image: "/midlaj.jpg",
+  },
+  {
+    name: "Jasim CM",
+    role: "Event Manager",
+    url: "https://www.linkedin.com/in/jasim-cm/",
+    image: "/jasim.jpg",
   },
 ];
 
@@ -48,7 +59,7 @@ export default function PeopleBehind() {
           </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
           {PEOPLE.map((person, i) => (
             <motion.div
               key={person.name}
@@ -68,8 +79,14 @@ export default function PeopleBehind() {
                 />
               </div>
               <div className="relative">
-                <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#00979C]/15 text-sm font-semibold text-[#62AEB2]">
-                  {person.name.charAt(0)}
+                <div className="mb-4 h-20 w-20 overflow-hidden rounded-full border border-white/15 bg-slate-800">
+                  <Image
+                    src={person.image}
+                    alt={person.name}
+                    width={80}
+                    height={80}
+                    className="h-full w-full object-cover"
+                  />
                 </div>
                 <h3 className="text-lg font-semibold">{person.name}</h3>
                 <p className="mt-1 text-sm text-white/70">{person.role}</p>
