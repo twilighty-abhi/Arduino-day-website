@@ -8,6 +8,7 @@ import Countdown from "./Countdown";
 import ShareButton from "./ShareButton";
 import CursorTrail from "./CursorTrail";
 import GlowPlusGrid from "./GlowPlusGrid";
+import { EVENT_REGISTRATION_URL } from "@/lib/event";
 
 const TYPING_TEXT = "Writing the next chapter of AI together";
 const TYPING_DELAY = 80;
@@ -108,28 +109,12 @@ export default function Hero() {
           className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-12"
         >
           <Link
-            href="https://forms.gle/VAmtAYbFiyqGQM9m8"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-8 py-4 rounded-full bg-[#E47128] hover:bg-[#d36523] text-white font-semibold transition-colors min-w-[180px] text-center"
-          >
-            Register for Line Following Robot
-          </Link>
-          <Link
-            href="https://tinkerhub.org/events/G5DBKWNQ9K/Arduino%20Day%202026"
+            href={EVENT_REGISTRATION_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="px-8 py-4 rounded-full bg-[#00979C] hover:bg-[#00878F] text-white font-semibold transition-colors min-w-[180px] text-center"
           >
             Register Now
-          </Link>
-          <Link
-            href="https://forms.gle/M91FRPjqZFS5MDVg7"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-8 py-4 rounded-full border-2 border-white/40 hover:border-white/70 text-white font-semibold transition-colors min-w-[180px] text-center"
-          >
-            Call for Speakers
           </Link>
           <ShareButton className="px-8 py-4 rounded-full border-2 border-[#62AEB2]/50 hover:border-[#62AEB2] text-[#62AEB2] font-semibold transition-colors min-w-[180px] text-center flex items-center justify-center gap-2" />
         </motion.div>
