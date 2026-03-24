@@ -13,6 +13,7 @@ const navLinks = [
   { href: "#faq", label: "FAQ" },
   { href: "#register", label: "Register" },
   { href: "/line-following", label: "Line Following" },
+  { href: "/im-attending", label: "I'm Attending" },
 ];
 
 export default function Navbar() {
@@ -36,24 +37,21 @@ export default function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled || !isHomePage
-          ? "bg-[#0a1628]/95 backdrop-blur-md py-2 shadow-lg"
-          : "bg-transparent py-4"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
+        isScrolled
+          ? "bg-white/95 backdrop-blur-md py-2 shadow-md border-slate-200/90"
+          : "bg-white/75 backdrop-blur-md py-4 border-slate-200/50"
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2">
           <Image
-            src="https://content.arduino.cc/brand/arduino-white.svg"
-            alt="Arduino"
+            src="/Arduino_DAYS2026_Logotype_collapsed.svg"
+            alt="Arduino Days 2026"
             width={isScrolled ? 100 : 120}
             height={isScrolled ? 24 : 32}
             className="h-6 sm:h-8 w-auto transition-all"
-          />
-          <span className="hidden sm:inline text-white/90 font-medium text-sm">
-            Day 2026
-          </span>
+          /> 
         </Link>
 
         {/* Desktop nav */}
@@ -62,7 +60,7 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={getNavHref(link.href)}
-              className="text-sm font-medium text-white/90 hover:text-white transition-colors"
+              className="text-sm font-medium text-slate-700 hover:text-[#0f766e] transition-colors"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               {link.label}
@@ -74,7 +72,7 @@ export default function Navbar() {
         <button
           type="button"
           aria-label="Toggle menu"
-          className="md:hidden p-2 text-white"
+          className="md:hidden p-2 text-slate-800 hover:text-[#0f766e]"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           <svg
@@ -109,14 +107,14 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-[#0a1628]/98 backdrop-blur-md overflow-hidden"
+            className="md:hidden bg-white/98 backdrop-blur-md overflow-hidden border-b border-slate-200 shadow-lg"
           >
             <div className="px-4 py-4 space-y-2">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={getNavHref(link.href)}
-                  className="block py-3 text-white/90 hover:text-white font-medium"
+                  className="block py-3 text-slate-700 hover:text-[#0f766e] font-medium"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.label}

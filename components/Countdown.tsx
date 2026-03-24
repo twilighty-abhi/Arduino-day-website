@@ -5,13 +5,16 @@ import { motion } from "framer-motion";
 
 interface CountdownProps {
   targetDate: Date;
+  /** `light` = dark text on pale cards (hero on white). */
+  theme?: "dark" | "light";
 }
 
 function pad(n: number) {
   return n.toString().padStart(2, "0");
 }
 
-export default function Countdown({ targetDate }: CountdownProps) {
+export default function Countdown({ targetDate, theme = "dark" }: CountdownProps) {
+  const isLight = theme === "light";
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, mins: 0, secs: 0 });
   const [mounted, setMounted] = useState(false);
 
@@ -44,10 +47,22 @@ export default function Countdown({ targetDate }: CountdownProps) {
       <div className="flex gap-3 sm:gap-6 justify-center flex-wrap">
         {["Days", "Hours", "Mins", "Secs"].map((label) => (
           <div key={label} className="flex flex-col items-center">
-            <div className="w-16 sm:w-20 h-16 sm:h-20 rounded-xl bg-white/10 flex items-center justify-center">
-              <span className="text-2xl sm:text-3xl font-bold text-white">--</span>
+            <div
+              className={`w-16 sm:w-20 h-16 sm:h-20 rounded-xl flex items-center justify-center ${
+                isLight ? "bg-white border border-slate-200 shadow-sm" : "bg-white/10"
+              }`}
+            >
+              <span
+                className={`text-2xl sm:text-3xl font-bold ${isLight ? "text-slate-800" : "text-white"}`}
+              >
+                --
+              </span>
             </div>
-            <span className="text-xs sm:text-sm text-white/70 mt-2">{label}</span>
+            <span
+              className={`text-xs sm:text-sm mt-2 ${isLight ? "text-slate-500" : "text-white/70"}`}
+            >
+              {label}
+            </span>
           </div>
         ))}
       </div>
@@ -71,12 +86,26 @@ export default function Countdown({ targetDate }: CountdownProps) {
           animate={{ scale: 1, opacity: 1 }}
           transition={{ type: "spring", stiffness: 200 }}
         >
-          <div className="w-16 sm:w-20 h-16 sm:h-20 rounded-xl bg-white/10 flex items-center justify-center border border-white/20">
-            <span className="text-2xl sm:text-3xl font-bold text-white tabular-nums">
+          <div
+            className={`w-16 sm:w-20 h-16 sm:h-20 rounded-xl flex items-center justify-center tabular-nums ${
+              isLight
+                ? "bg-white border border-slate-200 shadow-sm"
+                : "bg-white/10 border border-white/20"
+            }`}
+          >
+            <span
+              className={`text-2xl sm:text-3xl font-bold tabular-nums ${
+                isLight ? "text-slate-900" : "text-white"
+              }`}
+            >
               {pad(value)}
             </span>
           </div>
-          <span className="text-xs sm:text-sm text-white/70 mt-2">{label}</span>
+          <span
+            className={`text-xs sm:text-sm mt-2 ${isLight ? "text-slate-500" : "text-white/70"}`}
+          >
+            {label}
+          </span>
         </motion.div>
       ))}
     </div>

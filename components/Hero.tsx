@@ -34,14 +34,14 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-[#0a1628] via-[#0d2137] to-[#0a1628]">
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-white via-[#f8fafc] to-[#f1f5f9]">
       <CursorTrail />
-      {/* Circuit board background - parallax */}
+      {/* Subtle grid — tuned for light bg so the logotype stays readable */}
       <motion.div className="absolute inset-0" style={{ y: backgroundY }}>
         <div
-          className="absolute inset-0 opacity-20"
+          className="absolute inset-0 opacity-[0.12]"
           style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300979C' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300979C' fill-opacity='0.55'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
           }}
         />
         <GlowPlusGrid />
@@ -55,11 +55,11 @@ export default function Hero() {
           className="mb-4"
         >
           <Image
-            src="https://content.arduino.cc/brand/arduino-white.svg"
-            alt="Arduino"
-            width={180}
-            height={48}
-            className="mx-auto h-10 sm:h-12 w-auto"
+            src="/Arduino_DAYS2026_Logotype.svg"
+            alt="Arduino Days 2026"
+            width={320}
+            height={85}
+            className="mx-auto h-12 sm:h-14 w-auto"
             priority
           />
         </motion.div>
@@ -68,7 +68,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-2"
+          className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-900 mb-2"
         >
           Arduino Day 2026
         </motion.h1>
@@ -77,7 +77,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-xl sm:text-2xl text-[#62AEB2] font-medium mb-2"
+          className="text-xl sm:text-2xl text-[#0f766e] font-medium mb-2"
         >
           TinkerSpace Kochi
         </motion.p>
@@ -86,7 +86,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="text-[#62AEB2]/90 text-sm sm:text-base mb-8 min-h-[2rem]"
+          className="text-slate-600 text-sm sm:text-base mb-8 min-h-[2rem]"
         >
           {displayText}
           {!isTypingComplete && (
@@ -99,7 +99,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
         >
-          <Countdown targetDate={new Date("2026-03-28T10:00:00")} />
+          <Countdown targetDate={new Date("2026-03-28T10:00:00")} theme="light" />
         </motion.div>
 
         <motion.div
@@ -116,7 +116,7 @@ export default function Hero() {
           >
             Register Now
           </Link>
-          <ShareButton className="px-8 py-4 rounded-full border-2 border-[#62AEB2]/50 hover:border-[#62AEB2] text-[#62AEB2] font-semibold transition-colors min-w-[180px] text-center flex items-center justify-center gap-2" />
+          <ShareButton className="px-8 py-4 rounded-full border-2 border-slate-300 hover:border-[#00979C] text-slate-800 hover:text-[#0f766e] font-semibold transition-colors min-w-[180px] text-center flex items-center justify-center gap-2" />
         </motion.div>
       </div>
 
