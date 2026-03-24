@@ -2,6 +2,8 @@ export interface ScheduleItem {
   time: string;
   title: string;
   description: string;
+  linkLabel?: string;
+  linkUrl?: string;
   type:
     | "workshop"
     | "talk"
@@ -24,67 +26,73 @@ export const scheduleData: ScheduleItem[] = [
   {
     time: "10:15",
     title: "Rust in Arduino",
-    description: "Midlaj + Samad • 20 mins",
+    description:
+      "Midlaj C · SWE @ Desh Keyboard · Anin Arafath · SWE @ Desh Keyboard • 20 mins",
     type: "flash-talk",
   },
   {
     time: "10:35",
     title: "Microprocessors",
-    description: "Shan Shoukath • 20 mins",
+    description: "Shan Shoukath · Maker • 20 mins",
     type: "flash-talk",
   },
   {
     time: "10:55",
-    title: "Micro Python OS in Arduino",
+    title: "TBD",
     description: "TBD • 20 mins",
     type: "talk",
   },
   {
     time: "11:15",
-    title: "Interactive",
+    title: "Tea Break",
     description: "25 mins",
     type: "interactive",
   },
   {
     time: "11:40",
     title: "Arduino Q: Possibilities",
-    description: "Salman • 40 mins",
+    description:
+      "Salman Faris · Community @ Screenly.io · Co-founder, MakerGram • 40 mins",
     type: "talk",
   },
   {
     time: "12:20",
-    title: "What beyond Arduino? (MCU to PCB)",
-    description: "TBD • 20 mins",
+    title: "From prototype to product — scale up your Arduino project",
+    description: "Mohammed Shan · Maker • 20 mins",
     type: "flash-talk",
   },
   {
     time: "12:40",
     title: "Lunch Break",
-    description: "55 mins",
+    description: "55 mins · Food not provided — please arrange your own meal.",
+    linkLabel: "Food place suggestions",
+    linkUrl:
+      "https://tinkerhub.frappe.cloud/tinkerspace/accessibility#:~:text=min%20View%20Location-,Food%20Spots,-11%20to%2011",
     type: "break",
   },
   {
     time: "13:35",
     title: "Micro Mouse / Line Following Competition",
-    description: "60 mins",
+    description: "60 mins · Prizes for winners.",
     type: "competition",
   },
   {
     time: "14:35",
-    title: "3D Enclosure for Arduino Components",
-    description: "TBD • 30 mins",
-    type: "demo",
+    title: "Handovering Seed Xiao to TinkerSpace",
+    description:
+      "Salman Faris · Community @ Screenly.io · Co-founder, MakerGram • 30 mins",
+    type: "talk",
   },
   {
     time: "15:05",
-    title: "Interactive",
+    title: "Networking Break",
     description: "25 mins",
     type: "interactive",
   },
   {
     time: "15:30",
     title: "Automating Workspaces",
-    description: "Ziyad • 40 mins",
+    description: "Muhammed Ziyad · SWE @ Desh Keyboard • 40 mins",
     type: "talk",
   },
   {
@@ -92,11 +100,5 @@ export const scheduleData: ScheduleItem[] = [
     title: "Closing + Open Floor / Networking",
     description: "Organizers • 25 mins",
     type: "networking",
-  },
-  {
-    time: "16:35",
-    title: "End",
-    description: "—",
-    type: "break",
   },
 ];

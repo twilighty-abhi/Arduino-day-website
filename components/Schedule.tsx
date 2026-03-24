@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { scheduleData } from "@/lib/schedule";
 
@@ -51,7 +52,18 @@ export default function Schedule() {
               </div>
               <div className="flex-1">
                 <div className="flex flex-wrap gap-2 items-center mb-1">
-                  <h3 className="font-semibold text-[#0a1628]">{item.title}</h3>
+                  <h3 className="font-semibold text-[#0a1628]">
+                    {item.type === "competition" ? (
+                      <Link
+                        href="/line-following"
+                        className="hover:text-[#00979C] hover:underline underline-offset-2"
+                      >
+                        {item.title}
+                      </Link>
+                    ) : (
+                      item.title
+                    )}
+                  </h3>
                   <span
                     className={`px-2 py-0.5 rounded-full text-xs font-medium ${
                       typeColors[item.type] ?? "bg-gray-200 text-gray-600"
@@ -60,7 +72,23 @@ export default function Schedule() {
                     {item.type}
                   </span>
                 </div>
-                <p className="text-gray-600 text-sm">{item.description}</p>
+                <p className="text-gray-600 text-sm">
+                  {item.description}
+                  {item.linkUrl && item.linkLabel && (
+                    <>
+                      {" "}
+                      <a
+                        href={item.linkUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#00979C] hover:underline font-medium"
+                      >
+                        {item.linkLabel}
+                      </a>
+                      .
+                    </>
+                  )}
+                </p>
               </div>
             </motion.div>
           ))}
