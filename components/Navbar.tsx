@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
@@ -11,12 +12,18 @@ const navLinks = [
   { href: "#schedule", label: "Schedule" },
   { href: "#faq", label: "FAQ" },
   { href: "#register", label: "Register" },
-  { href: "/im-attending", label: "I'm Attending" },
+  { href: "/line-following", label: "Line Following" },
 ];
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
+  const getNavHref = (href: string) => {
+    if (!href.startsWith("#")) return href;
+    return isHomePage ? href : `/${href}`;
+  };
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -30,11 +37,13 @@ export default function Navbar() {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-[#0a1628]/95 backdrop-blur-md py-2 shadow-lg" : "bg-transparent py-4"
+        isScrolled || !isHomePage
+          ? "bg-[#0a1628]/95 backdrop-blur-md py-2 shadow-lg"
+          : "bg-transparent py-4"
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="#" className="flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-2">
           <Image
             src="https://content.arduino.cc/brand/arduino-white.svg"
             alt="Arduino"
@@ -52,7 +61,7 @@ export default function Navbar() {
           {navLinks.map((link) => (
             <Link
               key={link.href}
-              href={link.href}
+              href={getNavHref(link.href)}
               className="text-sm font-medium text-white/90 hover:text-white transition-colors"
               onClick={() => setIsMobileMenuOpen(false)}
             >
@@ -106,7 +115,7 @@ export default function Navbar() {
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
-                  href={link.href}
+                  href={getNavHref(link.href)}
                   className="block py-3 text-white/90 hover:text-white font-medium"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
