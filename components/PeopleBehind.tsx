@@ -6,13 +6,13 @@ import { motion } from "framer-motion";
 const PEOPLE = [
   {
     name: "Abdul Samad M J",
-    role: "Content & Speaker Coordination",
+    role: "Event Coordinator",
     url: "https://www.linkedin.com/in/abdulsamadmj/",
     image: "/samad.jpeg",
   },
   {
     name: "Abhiram N J",
-    role: "Host & Local Organizer",
+    role: "Local Host & Organizer",
     url: "https://www.linkedin.com/in/abhiram-n-j/",
     image: "/Abhiram.png",
   },
@@ -24,7 +24,7 @@ const PEOPLE = [
   },
   {
     name: "Midlaj C",
-    role: "Tech, Demos & Workshop",
+    role: "Photography + Ops",
     url: "https://www.linkedin.com/in/midlajc/",
     image: "/midlaj.jpg",
   },
