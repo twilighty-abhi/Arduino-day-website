@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 const PEOPLE = [
   {
     name: "Abdul Samad M J",
-    role: "Content & Speaker Support",
+    role: "Content & Speaker Coordination",
     url: "https://www.linkedin.com/in/abdulsamadmj/",
     image: "/samad.jpeg",
   },
@@ -18,13 +18,13 @@ const PEOPLE = [
   },
   {
     name: "Jasim CM",
-    role: "Event Manager",
+    role: "Local Host & Tinkerspace Coordinator",
     url: "https://www.linkedin.com/in/jasim-cm/",
     image: "/jasim.jpg",
   },
   {
     name: "Midlaj C",
-    role: "Tech, Demos & Workshops",
+    role: "Tech, Demos & Workshop",
     url: "https://www.linkedin.com/in/midlajc/",
     image: "/midlaj.jpg",
   },
