@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Countdown from "./Countdown";
-import ShareButton from "./ShareButton";
 import CursorTrail from "./CursorTrail";
 import GlowPlusGrid from "./GlowPlusGrid";
 import { EVENT_REGISTRATION_URL } from "@/lib/event";
@@ -116,7 +115,12 @@ export default function Hero() {
           >
             Register Now
           </Link>
-          <ShareButton className="px-8 py-4 rounded-full border-2 border-slate-300 hover:border-[#00979C] text-slate-800 hover:text-[#0f766e] font-semibold transition-colors min-w-[180px] text-center flex items-center justify-center gap-2" />
+          <Link
+            href="/im-attending"
+            className="px-8 py-4 rounded-full border-2 border-slate-300 hover:border-[#00979C] text-slate-800 hover:text-[#0f766e] font-semibold transition-colors min-w-[180px] text-center"
+          >
+            I&apos;m Attending Poster
+          </Link>
         </motion.div>
       </div>
 
