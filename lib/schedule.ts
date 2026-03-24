@@ -25,7 +25,7 @@ export const scheduleData: ScheduleItem[] = [
   },
   {
     time: "10:15",
-    title: "Rust in Arduino",
+    title: "Rethinking Arduino with Rust",
     description:
       "Midlaj C · SWE @ Desh Keyboard · Anin Arafath · SWE @ Desh Keyboard • 20 mins",
     type: "flash-talk",
@@ -72,13 +72,13 @@ export const scheduleData: ScheduleItem[] = [
   },
   {
     time: "13:35",
-    title: "Micro Mouse / Line Following Competition",
+    title: "Line Following Robot Competition",
     description: "60 mins · Prizes for winners.",
     type: "competition",
   },
   {
     time: "14:35",
-    title: "Handovering Seed Xiao to TinkerSpace",
+    title: "Seeed Studio x TinkerSpace: Hardware Donation Session",
     description:
       "Salman Faris · Community @ Screenly.io · Co-founder, MakerGram • 30 mins",
     type: "talk",
@@ -91,7 +91,7 @@ export const scheduleData: ScheduleItem[] = [
   },
   {
     time: "15:30",
-    title: "Automating Workspaces",
+    title: "Turning an Office into a Smart Workspace",
     description: "Muhammed Ziyad · SWE @ Desh Keyboard • 40 mins",
     type: "talk",
   },
