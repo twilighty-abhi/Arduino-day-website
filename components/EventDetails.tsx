@@ -70,7 +70,7 @@ export default function EventDetails() {
             </p>
 
             <div className="mt-6 flex flex-wrap gap-2">
-              {["Workshops", "Hands-on demos", "Community showcase", "Beginner-friendly"].map((t) => (
+              {["Workshops", "Hands-on demos", "Beginner-friendly"].map((t) => (
                 <span
                   key={t}
                   className="rounded-full bg-white px-3 py-1 text-sm text-gray-700 shadow-sm border border-gray-100"
