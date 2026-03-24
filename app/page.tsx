@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import AboutSection from "@/components/AboutSection";
 import EventDetails from "@/components/EventDetails";
 import Schedule from "@/components/Schedule";
+import Sponsors from "@/components/Sponsors";
 import RegistrationCTA from "@/components/RegistrationCTA";
 import FAQ from "@/components/FAQ";
 import PeopleBehind from "@/components/PeopleBehind";
@@ -17,6 +18,7 @@ export default function Home() {
         <AboutSection />
         <EventDetails />
         <Schedule />
+        <Sponsors />
         <RegistrationCTA />
         <FAQ />
         <PeopleBehind />
