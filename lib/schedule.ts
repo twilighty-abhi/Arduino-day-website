@@ -33,7 +33,7 @@ export const scheduleData: ScheduleItem[] = [
   },
   {
     time: "10:35",
-    title: "Microprocessors",
+    title: "Think Like a Machine : Microprocessors",
     description: "Shan Shoukath · Maker • 20 mins",
     type: "flash-talk",
   },
@@ -45,7 +45,7 @@ export const scheduleData: ScheduleItem[] = [
   },
   {
     time: "11:30",
-    title: "Arduino Q: Possibilities",
+    title: "Arduino Q: A New Kind of Arduino, What’s New & Why It Matters",
     description:
       "Salman Faris · Community @ Screenly.io · Co-founder, MakerGram • 40 mins",
     type: "talk",
